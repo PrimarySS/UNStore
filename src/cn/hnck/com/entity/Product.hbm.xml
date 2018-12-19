@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="cn.hnck.com.entity">
+
+	<!-- 配置类和表对应 class标签 name属性：实体类的全路径 table属性：数据库表的名称 -->
+	<class name="cn.hnck.com.entity.Product" table="product">
+
+		<!-- 配置表id和实体类id对应 hibernate要求实体类有唯一的属性 hibernate要求表有唯一字段 -->
+		<!-- id标签 name:实体类的属性 column:表的子段名称 -->
+		<id name="id" column="id">
+			<!--设置数据表id增长策略 native：自动生成id为主键 -->
+			<generator class="native"></generator>
+		</id>
+
+		<!-- 配置实体类其他属性 proprety标签 name:实体类的属性 column:表的子段名称 -->
+		<property name="name" column="name"></property>
+		<property name="description" column="description"></property>
+		<property name="price" column="price"></property>
+		<property name="imageSrc" column="imageSrc" length="500"></property>
+		
+	</class>
+
+</hibernate-mapping>
+          
+
+          

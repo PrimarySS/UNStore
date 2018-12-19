@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 设置编码方式 -->
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+
+	<!-- 上传的全部图片的最大限制 -->
+	<constant name="struts.multipart.maxSize" value="1024102400" />
+
+	<!-- 临时存放文件的路径 -->
+	<constant name="struts.multipart.saveDir" value="/UploadImages" />
+
+	<package name="defualt" extends="struts-default" namespace="/">
+
+		<action name="*product" class="ProductAction" method="{1}">
+			<result name="prolist">/product/proList.jsp</result>
+			<!-- 返回action继续调用方法 -->
+			<result name="findpro" type="chain">listproduct</result>
+			<result name="updatepro">/product/proUpdate.jsp</result>
+			<result name="recommendpro">/product/proRecommend.jsp</result>
+		</action>
+
+		<!-- 收货地址action -->
+		<action name="*spas" class="ShippingAddressAction" method="{1}">
+			<result name="list">/address/addrList.jsp</result>
+			<!-- 返回action继续调用方法 -->
+			<result name="find" type="chain">listspas</result>
+			<result name="update">/address/addrUpdate.jsp</result>
+		</action>
+		
+		<!-- 管理员登陆 action-->
+		<action name="*login" class="AdminLoginAction" method="{1}">
+			<result name="success">/menu.jsp</result>
+			<result name="msg">/admin.jsp</result>
+			<result name="error">/registered.jsp</result>
+			<result name="out">/admin.jsp</result>
+		</action>
+		
+		<!-- 名片管理action -->
+		<action name="*card" class="CardAction" method="{1}">
+			<result name="clist">/card/list.jsp</result>
+			<!-- 此action方法结束，执行此action另一方法 -->
+			<result name="csave" type="chain">listcard</result>
+			<result name="cfind">/card/update.jsp</result>
+		</action>
+		
+		<!-- 回收站action -->
+		<action name="*retrieve" class="CardRetrieveAction" method="{1}">
+			<!-- 此action方法结束，调用另一个action的方法 -->
+			<result name="rsuccess" type="redirectAction">listcard</result>
+			<result name="rfind">/card/retrieve.jsp</result>
+			<!-- 此action方法结束，执行此action另一方法 -->
+			<result name="rsave" type="chain">findretrieve</result>
+		</action>
+		
+		<!-- 导入文件action -->
+		<action name="*load" class="cn.hnck.com.action.card.UploadAction" method="{1}">
+			<!-- 此action方法结束，调用另一个action的方法 -->
+			<result name="lsuccess" type="redirectAction">listcard</result>
+		</action>
+		
+		<!-- 导出文件action -->
+		<action name="*" class="cn.hnck.com.action.card.DownLoadAction" method="{1}">
+			<!-- 此action方法结束，调用另一个action的方法 -->
+			<result name="lsuccess" type="stream"></result>
+		</action>
+
+	</package>
+
+</struts>

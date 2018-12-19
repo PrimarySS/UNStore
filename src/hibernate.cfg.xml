@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<!-- hibernate核心配置文件部分 -->
+
+<hibernate-configuration>
+	<session-factory>
+	
+		<!-- 1.配置数据库信息 -->
+		
+		<!-- 配置数据库驱动 -->
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<!-- 配置数据库地址 -->
+		<property name="hibernate.connection.url">jdbc:mysql:///store</property>
+		<!-- 配置数据库用户 -->
+		<property name="hibernate.connection.username">root</property>
+		<!-- 配置数据库密码 -->
+		<property name="hibernate.connection.password">root</property>
+		
+		<!-- 2.配置hibernate信息 -->
+
+		<!-- 输出sql语句 -->
+		<property name="hibernate.show_sql">true</property>
+		<!-- 输出sql的格式化语句 -->
+		<property name="hibernate.format_sql">true</property>
+		<!-- hibernate自动创建数据库表 update:数据库有这个表级更新，无则创建 -->
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<!-- 配置数据库格式语言 分页 -> mysql：limit ; oracle:rownum 让hibernate识别不同数据库的语言 -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<!-- 绑定session -->
+		<property name="hibernate.current_session_context_class">thread</property>
+
+	 	<!-- 3.把映射文件导入核心部分 -->
+		<mapping resource="cn/hnck/com/entity/Card.hbm.xml" />
+
+	</session-factory>
+</hibernate-configuration>
+
